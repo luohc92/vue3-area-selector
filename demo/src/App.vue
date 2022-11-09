@@ -3,7 +3,6 @@
     <el-tabs v-model="active">
       <el-tab-pane label="基础使用" name="1">
         <Default />
-        <MdEditor v-model="DefaultMd" previewOnly />
       </el-tab-pane>
       <el-tab-pane label="限制省/市/区" name="2">
         <Level />
@@ -27,15 +26,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Default from "../components/default.vue";
-import DefaultMd from "../markdown/default.md?raw";
 import Level from "../components/level.vue";
 import Disabled from "../components/disabled.vue";
 import Customer from "../components/customer.vue";
 import Town from "../components/town.vue";
 import Trigger from "../components/trigger.vue";
-import MdEditor from "md-editor-v3";
-import "md-editor-v3/lib/style.css";
-const active = ref("5");
+const active = ref("1");
 </script>
 <style>
 .app {

@@ -1,19 +1,24 @@
 <template>
   <div>
-    <AreaSelect v-model="area">
+    <AreaSelector v-model="area">
       <el-button type="primary" size="default">按钮触发</el-button>
-    </AreaSelect>
+    </AreaSelector>
     <p>result：{{ area }}</p>
-    <AreaSelect v-model="area2">
+    <AreaSelector v-model="area2">
       <el-link>文本触发</el-link>
-    </AreaSelect>
+    </AreaSelector>
     <p>result：{{ area2 }}</p>
+    <MdEditor v-model="TriggerMd" previewOnly />
   </div>
 </template>
 <script setup lang="ts">
+import TriggerMd from "../markdown/trigger.md?raw";
 import { ref } from "vue";
-import { AreaSelect, AreaSelectResultDto } from "@luohc92/vue3-area-select";
-import "@luohc92/vue3-area-select/dist/style.css";
-const area = ref<AreaSelectResultDto>();
-const area2 = ref<AreaSelectResultDto>();
+import {
+  AreaSelector,
+  AreaSelectorResultDto,
+} from "@luohc92/vue3-area-selector";
+import "@luohc92/vue3-area-selector/dist/style.css";
+const area = ref<AreaSelectorResultDto>();
+const area2 = ref<AreaSelectorResultDto>();
 </script>

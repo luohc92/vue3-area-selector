@@ -8,6 +8,11 @@ import type {
 const install = function (app: any) {
   app.component("AreaSelector", AreaSelector);
 };
-export { AreaSelector };
-export { AreaSelectorResultDto, AreaDataDto, AreaSelectorPropsDto, Resolve };
+export {
+  AreaSelector,
+  AreaSelectorResultDto,
+  AreaDataDto,
+  AreaSelectorPropsDto,
+  Resolve,
+};
 export default { install };

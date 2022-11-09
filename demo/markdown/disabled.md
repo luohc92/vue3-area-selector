@@ -1,11 +1,10 @@
+```
 <template>
   <AreaSelector :props="areaSelectProps" v-model="area"> </AreaSelector>
   <p>result：{{ area }}</p>
-  <MdEditor v-model="DisabledMd" previewOnly />
 </template>
 
 <script setup lang="ts">
-import DisabledMd from "../markdown/disabled.md?raw";
 import { ref } from "vue";
 import {
   AreaSelector,
@@ -24,3 +23,5 @@ const area = ref<AreaSelectorResultDto>({
   code: "13",
 });
 </script>
+
+```

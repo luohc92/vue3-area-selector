@@ -1,3 +1,4 @@
+```
 <template>
   <div class="m-b-10">
     <el-radio-group v-model="areaSelectProps.level">
@@ -19,12 +20,10 @@
   >
   </AreaSelector>
   <p>result：{{ area }}</p>
-  <MdEditor v-model="LevelMd" previewOnly />
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import LevelMd from "../markdown/level.md?raw";
 import {
   AreaSelector,
   AreaSelectorPropsDto,
@@ -46,3 +45,6 @@ const close = (data: AreaSelectorResultDto) => {
   console.log("close", data);
 };
 </script>
+
+
+```

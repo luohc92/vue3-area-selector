@@ -162,17 +162,17 @@ import {
 } from "vue";
 import {
   AreaDataDto,
-  AreaSelectPropsDto,
+  AreaSelectorPropsDto,
   DomPropsDto,
-  AreaSelectResultDto,
+  AreaSelectorResultDto,
 } from "./types";
 const props = defineProps({
   props: {
-    type: Object as PropType<AreaSelectPropsDto>,
+    type: Object as PropType<AreaSelectorPropsDto>,
     default: {},
   },
   modelValue: {
-    type: Object as PropType<AreaSelectResultDto>,
+    type: Object as PropType<AreaSelectorResultDto>,
     default: () => {},
   },
 });
@@ -182,7 +182,7 @@ const state = reactive({
     showAllLevels: true,
     townLazy: false,
   },
-  props: {} as AreaSelectPropsDto,
+  props: {} as AreaSelectorPropsDto,
   townLazyLoading: false,
   provinces: [] as AreaDataDto[],
   provinceCode: "",
@@ -192,7 +192,7 @@ const state = reactive({
   districtCode: "",
   towns: [] as AreaDataDto[],
   townCode: "",
-  result: {} as AreaSelectResultDto,
+  result: {} as AreaSelectorResultDto,
   active: [] as string[],
   showPanel: false,
   transition: "area-zoom-in-top",
@@ -302,14 +302,14 @@ watch(
     if (props.modelValue) {
       state.result = JSON.parse(JSON.stringify(props.modelValue));
     } else {
-      state.result = {} as AreaSelectResultDto;
+      state.result = {} as AreaSelectorResultDto;
     }
   },
   { immediate: true }
 );
 const isDisabled = (code: string) => {
   if (state.props.disabled) {
-    const idx = state.props.disabled.findIndex((e) => e === code);
+    const idx = state.props.disabled.findIndex((e: string) => e === code);
     return idx >= 0;
   }
   return false;
@@ -445,11 +445,11 @@ const initTownLazyLoadCallBack = (
   state.townCode = townCode;
 };
 const close = () => {
-  const result: AreaSelectResultDto = state.result;
+  const result: AreaSelectorResultDto = state.result;
   emits("close", result);
 };
 const onChange = () => {
-  const result: AreaSelectResultDto = state.result;
+  const result: AreaSelectorResultDto = state.result;
   emits("update:modelValue", result);
   emits("change", result);
 };

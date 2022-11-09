@@ -1,14 +1,13 @@
+```
 <template>
   <div>
     <AreaSelector v-model="area" :props="areaSelectProps"></AreaSelector>
     <p>result：{{ area }}</p>
     <p>* 数据需要符合国家行政区域编码规则</p>
-    <MdEditor v-model="CustomerMd" previewOnly />
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import CustomerMd from "../markdown/customer.md?raw";
 import {
   AreaSelector,
   AreaSelectorPropsDto,
@@ -49,3 +48,4 @@ const areaSelectProps = ref<AreaSelectorPropsDto>({
   ],
 });
 </script>
+```

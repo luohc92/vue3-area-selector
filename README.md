@@ -1,4 +1,4 @@
-# vue3-image-viewer
+# @luohc92/vue3-area-selector
 
 a area selector for vue3.x
 
@@ -7,16 +7,16 @@ a area selector for vue3.x
 ## Install 安装
 
 ```
-npm install @luohc92/vue3-area-select
+npm install @luohc92/vue3-area-selector
 ```
 
 ## Usage 按需使用方法
 
 ```
 import {
- AreaSelect,
-} from "@luohc92/vue3-area-select";
-import "@luohc92/vue3-area-select/dist/style.css";
+ AreaSelector,
+} from "@luohc92/vue3-area-selector";
+import "@luohc92/vue3-area-selector/dist/style.css";
 ```
 
 ## Usage 全局使用方法
@@ -24,10 +24,10 @@ import "@luohc92/vue3-area-select/dist/style.css";
 ```
 在main.js中引入
 
-import AreaSelect from "@luohc92/vue3-area-select";
-import "@luohc92/vue3-area-select/dist/style.css";
+import AreaSelector from "@luohc92/vue3-area-selector";
+import "@luohc92/vue3-area-selector/dist/style.css";
 const app = createApp(App);
-app.use(AreaSelect);
+app.use(AreaSelector);
 ```
 
 ## Example 示例
@@ -35,28 +35,28 @@ app.use(AreaSelect);
 ```
 <template>
   <div class="app">
-    <AreaSelect
+    <AreaSelector
       @change="change"
       @open="open"
       @close="close"
       :props="areaSelectProps"
       v-model="area"
     >
-    </AreaSelect>
+    </AreaSelector>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import {
-  AreaSelect,
+  AreaSelector,
   AreaDataDto,
-  AreaSelectPropsDto,
-  AreaSelectResultDto,
+  AreaSelectorPropsDto,
+  AreaSelectorResultDto,
   Resolve,
-} from "@luohc92/vue3-area-select";
-import "@luohc92/vue3-area-select/dist/style.css";
-const areaSelectProps = reactive<AreaSelectPropsDto>({
+} from "@luohc92/vue3-area-selector";
+import "@luohc92/vue3-area-selector/dist/style.css";
+const areaSelectProps = reactive<AreaSelectorPropsDto>({
   popperClass: "my-area-popup",
   townLazy: true,
   level: 0,
@@ -76,7 +76,7 @@ const areaSelectProps = reactive<AreaSelectPropsDto>({
     }, 2000);
   },
 });
-const area = ref<AreaSelectResultDto>({
+const area = ref<AreaSelectorResultDto>({
   town: "东华门街道",
   district: "东城区",
   code: "110101001",
@@ -84,13 +84,13 @@ const area = ref<AreaSelectResultDto>({
   province: "北京市",
 });
 
-const change = (data: AreaSelectResultDto) => {
+const change = (data: AreaSelectorResultDto) => {
   console.log(data);
 };
 const open = () => {
   console.log("open");
 };
-const close = (data: AreaSelectResultDto) => {
+const close = (data: AreaSelectorResultDto) => {
   console.log("close", data);
 };
 </script>
@@ -116,7 +116,7 @@ const close = (data: AreaSelectResultDto) => {
 | areaData      | AreaDataDto[]           | false    | 自定义区域数据，最多四 级               |         |
 
 ## Events
-| Name    | Description                                   | Default                       |
+| Name    | Description                                   | Parameters                       |
 | ------- | --------------------------------------------- | ----------------------------- |
 | change  | change function callback 当选中节点变化时触发 | chang node value 选中节点的值 |
 | open    | when popup open callback 当选择窗打开时触发   |                               |
