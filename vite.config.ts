@@ -8,8 +8,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "packages/index.ts"),
-      name: "vue3-area-select",
-      fileName: (format) => `vue3-area-select.${format}.ts`,
+      name: "vue3-area-selector",
+      fileName: (format) => `vue3-area-selector.${format}.ts`,
     },
     rollupOptions: {
       external: ["vue"],

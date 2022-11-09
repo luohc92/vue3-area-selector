@@ -1,93 +1,59 @@
 <template>
   <div class="app">
-    <div class="html">
-      <div class="a"></div>
-      <AreaSelect
-        @change="change"
-        @open="open"
-        :props="areaSelectProps"
-        v-model="area1"
-      >
-      </AreaSelect>
-      <div class="h2"></div>
-      <AreaSelect
-        :props="areaSelectProps"
-        @change="change2"
-        @close="close2"
-        v-model="area2"
-      >
-        <el-button type="primary" size="default">22</el-button>
-      </AreaSelect>
-      <div class="h2"></div>
-    </div>
+    <el-tabs v-model="active">
+      <el-tab-pane label="基础使用" name="1">
+        <Default />
+        <MdEditor v-model="DefaultMd" previewOnly />
+      </el-tab-pane>
+      <el-tab-pane label="限制省/市/区" name="2">
+        <Level />
+      </el-tab-pane>
+      <el-tab-pane label="禁用选项" name="3">
+        <Disabled />
+      </el-tab-pane>
+      <el-tab-pane label="自定义数据" name="4">
+        <Customer />
+      </el-tab-pane>
+      <el-tab-pane label="四级地址选择" name="5">
+        <Town />
+      </el-tab-pane>
+      <el-tab-pane label="自定义触发体" name="6">
+        <Trigger  />
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
-import areaData from "./assets/data.json";
-import { AreaSelect, AreaSelectPropsDto, AreaSelectResultDto } from "@luohc92/vue3-area-select";
-import "@luohc92/vue3-area-select/dist/style.css";
-const areaSelectProps = reactive<AreaSelectPropsDto>({
-  level: 3,
-  showAllLevels: true,
-  popperClass: "abcd",
-  areaData: areaData,
-  townLazy: true,
-  disabled: ["1101", "110101001"],
-  lazyLoad: (node: any, resolve: any) => {
-    setTimeout(() => {
-      resolve([{ code: "110101001", name: "东华门街道" }]);
-    }, 2000);
-  },
-});
-const area1 = ref<AreaSelectResultDto>({
-  town: "平坦镇",
-  district: "郊区",
-  code: "140311103",
-  city: "阳泉市",
-  province: "山西省",
-});
-const areaData2 = ref([{ code: "11", name: "北京市" }]);
-const area2 = ref({
-  town: "平坦镇",
-  district: "郊区",
-  code: "140311103",
-  city: "阳泉市",
-  province: "山西省",
-});
-const change = (e: any) => {
-  console.log(e);
-};
-const open = () => {
-  console.log("open");
-};
-const close = (e: any) => {
-  console.log("close", e);
-};
-const change2 = (e: any) => {
-  console.log(e);
-};
-const open2 = () => {
-  console.log("open");
-};
-const close2 = (e: any) => {
-  console.log("close", e);
-};
+import { ref } from "vue";
+import Default from "../components/default.vue";
+import DefaultMd from "../markdown/default.md?raw";
+import Level from "../components/level.vue";
+import Disabled from "../components/disabled.vue";
+import Customer from "../components/customer.vue";
+import Town from "../components/town.vue";
+import Trigger from "../components/trigger.vue";
+import MdEditor from "md-editor-v3";
+import "md-editor-v3/lib/style.css";
+const active = ref("5");
 </script>
-
-<style scoped>
-.html {
-  padding: 50px;
-}
-.a {
-  height: 25px;
-}
-.h2 {
-  height: 600px;
-}
+<style>
 .app {
-  padding-top: 150px;
-  padding-left: 90px;
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.m-l-30 {
+  margin-left: 30px;
+}
+.m-b-10 {
+  margin-bottom: 10px;
+}
+p {
+  color: #666666;
+  font-size: 13px;
+}
+h5 {
+  color: #666666;
 }
 </style>

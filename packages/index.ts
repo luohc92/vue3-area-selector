@@ -1,12 +1,13 @@
-import AreaSelect from "./areaSelect.vue";
+import AreaSelector from "./areaSelector.vue";
 import type {
   AreaDataDto,
-  AreaSelectPropsDto,
-  AreaSelectResultDto,
+  AreaSelectorPropsDto,
+  AreaSelectorResultDto,
+  Resolve,
 } from "./types";
 const install = function (app: any) {
-  app.component("AreaSelect", AreaSelect);
+  app.component("AreaSelector", AreaSelector);
 };
-export { AreaSelect };
-export { AreaSelectResultDto, AreaDataDto, AreaSelectPropsDto };
+export { AreaSelector };
+export { AreaSelectorResultDto, AreaDataDto, AreaSelectorPropsDto, Resolve };
 export default { install };

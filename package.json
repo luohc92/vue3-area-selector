@@ -1,11 +1,11 @@
 {
-  "name": "@luohc92/vue3-area-select",
-  "description": "a image viewer for vue3.0 一款vue3.0的图片查看器",
-  "keyword": "vue vue3.0 image-viewer image",
+  "name": "@luohc92/vue3-area-selector",
+  "description": "a area selector for vue3.0 一款vue3.0的地址选择器",
+  "keyword": "a area selector for vue3.0",
   "license": "MIT",
   "author": "luohc92",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.3",
   "type": "module",
   "files": [
     "package.json",
@@ -13,12 +13,12 @@
     "LICENSE",
     "dist"
   ],
-  "module": "./dist/vue3-area-select.es.ts",
-  "main": "./dist/vue3-area-select.umd.ts",
+  "module": "./dist/vue3-area-selector.es.ts",
+  "main": "./dist/vue3-area-selector.umd.ts",
   "exports": {
     ".": {
-      "import": "./dist/vue3-area-select.es.ts",
-      "require": "./dist/vue3-area-select.umd.ts"
+      "import": "./dist/vue3-area-selector.es.ts",
+      "require": "./dist/vue3-area-selector.umd.ts"
     },
     "./dist/style.css": {
       "import": "./dist/style.css",
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luohc92/vue3-area-select.git"
+    "url": "git+https://github.com/luohc92/vue3-area-selector.git"
   },
   "scripts": {
     "dev": "vite",
