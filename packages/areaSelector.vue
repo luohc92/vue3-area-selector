@@ -1,13 +1,21 @@
 <template>
   <span class="area-selector" @click="trigger" ref="areaSelectRef">
     <slot v-if="$slots.default" />
-    <input
-      v-else
-      autocomplete="off"
-      class="area-selector-input"
-      :class="{ active: showPanel }"
-      v-model="valueString"
-    />
+    <div v-else class="area-selector-input">
+      <input
+        autocomplete="off"
+        :class="{ active: showPanel }"
+        v-model="valueString"
+        :placeholder="placeholder"
+      />
+      <div
+        class="clear-btn"
+        @click.stop="cmdClear"
+        v-if="clearable && state.result && state.result.code"
+      >
+        <CloseIcon></CloseIcon>
+      </div>
+    </div>
     <Teleport to="body">
       <transition :name="transition">
         <div
@@ -150,6 +158,7 @@
 <script setup lang="ts">
 import arrow from "./icons/arrow.vue";
 import loading from "./icons/loading.vue";
+import CloseIcon from "./icons/close.vue";
 import { areaDataJson } from "./data";
 import {
   computed,
@@ -174,6 +183,14 @@ const props = defineProps({
   modelValue: {
     type: Object as PropType<AreaSelectorResultDto>,
     default: () => {},
+  },
+  placeholder: {
+    type: String,
+    default: "请选择",
+  },
+  clearable: {
+    type: Boolean,
+    default: false,
   },
 });
 const state = reactive({
@@ -586,6 +603,11 @@ const _resizeHandler = () => {
     };
   }
 };
+const cmdClear = () => {
+  state.result = {} as AreaSelectorResultDto;
+  closePanel();
+  onChange();
+};
 const trigger = (_event: Event) => {
   if (!state.showPanel) {
     window.addEventListener("resize", _resizeHandler);
@@ -656,14 +678,23 @@ const {
 </script>
 
 <style>
+:root {
+  --area-selector-panel-bg: #fff;
+  --area-selector-border-color: #dcdfe6;
+  --area-selector-active-color: #409eff;
+  --area-selector-text-color: #606266;
+  --area-selector-list-item-hover-color: #f5f5f5;
+  --area-selector-list-item-disabled-color: #aaaaaa;
+  --area-selector-clearable-color: #aaaaaa;
+}
 .area-selector-panel {
   position: absolute;
   z-index: 1001;
 }
 .area-selector-panel-content {
   overflow: hidden;
-  background: #fff;
-  border: 1px solid #e4e7ed;
+  background: var(--area-selector-panel-bg);
+  border: 1px solid var(--area-selector-border-color);
   border-radius: 4px;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   display: flex;
@@ -672,8 +703,8 @@ const {
 .area-selector-list {
   min-width: 180px;
   box-sizing: border-box;
-  color: #606266;
-  border-right: 1px solid #e4e7ed;
+  color: var(--area-selector-text-color);
+  border-right: 1px solid var(--area-selector-border-color);
   position: relative;
   min-height: 100%;
   margin: 0;
@@ -693,7 +724,7 @@ const {
 .area-selector-list::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: transparent;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--area-selector-panel-bg);
   transition: background 0.12s ease-out;
 }
 .area-selector-list:hover::-webkit-scrollbar-thumb {
@@ -716,20 +747,20 @@ const {
   cursor: pointer;
 }
 .area-selector-list-item:hover {
-  background-color: #f5f5f5;
+  background-color: var(--area-selector-list-item-hover-color);
 }
 .area-selector-list-item.active {
-  color: #409eff;
+  color: var(--area-selector-active-color);
   font-weight: 700;
 }
 .area-selector-list-item.active .arrow-icon {
-  fill: #409eff;
+  fill: var(--area-selector-active-color);
 }
 .area-selector-list-item.disabled .arrow-icon {
-  fill: #aaaaaa;
+  fill: var(--area-selector-list-item-disabled-color);
 }
 .area-selector-list-item.disabled {
-  color: #aaaaaa;
+  color: var(--area-selector-list-item-disabled-color);
   cursor: not-allowed;
 }
 .area-selector-list-item span {
@@ -749,12 +780,12 @@ const {
 .loading-icon {
   width: 14px;
   height: 14px;
-  fill: #606266;
+  fill: var(--area-selector-text-color);
 }
 .arrow-icon {
   width: 14px;
   height: 14px;
-  fill: #606266;
+  fill: var(--area-selector-text-color);
 }
 
 .area-zoom-in-top-enter-active,
@@ -810,8 +841,8 @@ const {
   z-index: -1;
   content: " ";
   transform: rotate(45deg);
-  border: 1px solid #e4e7ed;
-  background: #ffffff;
+  border: 1px solid var(--area-selector-border-color);
+  background: var(--area-selector-panel-bg);
   box-sizing: border-box;
 }
 .area-selector-input {
@@ -819,18 +850,42 @@ const {
   display: inline-flex;
   width: 100%;
   height: 32px;
+}
+.area-selector-input > input {
   box-sizing: border-box;
   vertical-align: middle;
-  border: 1px solid #dcdfe6;
   border-radius: 4px;
   outline: none;
-  transition: border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  color: #606266;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--area-selector-border-color);
   padding: 1px 11px;
+  transition: border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: var(--area-selector-text-color);
 }
-.area-selector-input.active,
-.area-selector-input:active,
-.area-selector-input:focus {
-  border-color: #409eff;
+.area-selector-input > input.active,
+.area-selector-input > input:active,
+.area-selector-input > input:focus {
+  border-color: var(--area-selector-active-color);
+}
+.clear-btn {
+  height: 16px;
+  text-decoration: none;
+  color: var(--area-selector-clearable-color);
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -8px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.clear-btn:hover {
+  opacity: 1;
+}
+.clear-btn svg {
+  height: 16px;
+  width: 16px;
 }
 </style>

@@ -24,7 +24,6 @@ import {
   AreaSelectorResultDto,
   Resolve,
 } from "@luohc92/vue3-area-selector";
-import "@luohc92/vue3-area-selector/dist/style.css";
 const area = ref<AreaSelectorResultDto>();
 const area2 = ref<AreaSelectorResultDto>();
 const areaSelectProps = ref<AreaSelectorPropsDto>({
