@@ -133,7 +133,8 @@ const close = (data: AreaSelectorResultDto) => {
 
 ## css var 
 ```
-  --area-selector-panel-bg: #fff;
+  --area-selector-panel-bg: #ffffff;
+  --area-selector-input-bg: #ffffff;
   --area-selector-border-color: #dcdfe6;
   --area-selector-disable-bg: #f5f7fa;
   --area-selector-placeholder-color: #a8abb2;

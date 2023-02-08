@@ -691,7 +691,8 @@ const {
 </script>
 <style>
 :root {
-  --area-selector-panel-bg: #fff;
+  --area-selector-panel-bg: #ffffff;
+  --area-selector-input-bg: #ffffff;
   --area-selector-border-color: #dcdfe6;
   --area-selector-disable-bg: #f5f7fa;
   --area-selector-placeholder-color: #a8abb2;
@@ -880,6 +881,7 @@ const {
   padding: 1px 11px;
   transition: border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   color: var(--area-selector-text-color);
+  background-color: var(--area-selector-input-bg);
 }
 .area-selector-input.disabled input,
 .area-selector-input.disabled {
