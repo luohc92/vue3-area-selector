@@ -100,7 +100,10 @@ const close = (data: AreaSelectorResultDto) => {
 
 | Name    | Type       | Required | Description                                   | Default                       |
 | ------- | ---------- | -------- | --------------------------------------------- | ----------------------------- |
-| v-model | 具体见下表 | false    | binding value 选中项绑定值                    |                               |
+| v-model | AreaSelectorResultDto  | true    | binding value 选中项绑定值                    |                               |
+| clearable | Boolean | false    | 是否可以清空选项       |             false                  |
+| disable | Boolean | false    | 是否禁用       |             false                  |
+| placeholder | String | false    | 占位文字       |             '请选择'                  |
 | props   | 具体见下表 | false    |                                               |                               |
 
 ### Props 属性
@@ -121,6 +124,7 @@ const close = (data: AreaSelectorResultDto) => {
 | change  | change function callback 当选中节点变化时触发 | chang node value 选中节点的值 |
 | open    | when popup open callback 当选择窗打开时触发   |                               |
 | close   | when popup close callback 当选择窗关闭时触发  |                               |
+| clearable   | when clear callback 当清空时触发  |                               |
 
 ## Slot 
 | Name                    | Description                                   |

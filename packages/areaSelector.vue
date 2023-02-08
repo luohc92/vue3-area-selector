@@ -1,8 +1,9 @@
 <template>
   <span class="area-selector" @click="trigger" ref="areaSelectRef">
     <slot v-if="$slots.default" />
-    <div v-else class="area-selector-input">
+    <div v-else class="area-selector-input" :class="{ disabled: disabled }">
       <input
+        :disabled="disabled"
         autocomplete="off"
         :class="{ active: showPanel }"
         v-model="valueString"
@@ -192,6 +193,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 const state = reactive({
   initProps: {
@@ -331,7 +336,13 @@ const isDisabled = (code: string) => {
   }
   return false;
 };
-const emits = defineEmits(["update:modelValue", "change", "open", "close"]);
+const emits = defineEmits([
+  "update:modelValue",
+  "change",
+  "open",
+  "close",
+  "clearable",
+]);
 const open = () => {
   // 初始化
   state.active = [];
@@ -607,8 +618,10 @@ const cmdClear = () => {
   state.result = {} as AreaSelectorResultDto;
   closePanel();
   onChange();
+  emits("clearable");
 };
 const trigger = (_event: Event) => {
+  if (props.disabled) return;
   if (!state.showPanel) {
     window.addEventListener("resize", _resizeHandler);
     const dom = areaSelectRef?.value;
@@ -676,17 +689,20 @@ const {
   townCode,
 } = toRefs(state);
 </script>
-
 <style>
 :root {
   --area-selector-panel-bg: #fff;
   --area-selector-border-color: #dcdfe6;
+  --area-selector-disable-bg: #f5f7fa;
+  --area-selector-placeholder-color: #a8abb2;
   --area-selector-active-color: #409eff;
   --area-selector-text-color: #606266;
   --area-selector-list-item-hover-color: #f5f5f5;
   --area-selector-list-item-disabled-color: #aaaaaa;
   --area-selector-clearable-color: #aaaaaa;
 }
+</style>
+<style scoped>
 .area-selector-panel {
   position: absolute;
   z-index: 1001;
@@ -864,6 +880,20 @@ const {
   padding: 1px 11px;
   transition: border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   color: var(--area-selector-text-color);
+}
+.area-selector-input.disabled input,
+.area-selector-input.disabled {
+  background-color: var(--area-selector-disable-bg);
+  color: var(--area-selector-placeholder-color);
+  cursor: not-allowed;
+}
+.area-selector-input.disabled input::placeholder {
+  color: var(--area-selector-placeholder-color);
+}
+.area-selector-input.disabled > input.active,
+.area-selector-input.disabled > input:active,
+.area-selector-input.disabled > input:focus {
+  border-color: var(--area-selector-border-color);
 }
 .area-selector-input > input.active,
 .area-selector-input > input:active,

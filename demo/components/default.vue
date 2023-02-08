@@ -11,6 +11,7 @@ import { ref } from "vue";
 import {
   AreaSelector,
   AreaSelectorResultDto,
-} from "../../packages/index";
+} from "@luohc92/vue3-area-selector";
+import "@luohc92/vue3-area-selector/dist/style.css";
 const area = ref<AreaSelectorResultDto>();
 </script>

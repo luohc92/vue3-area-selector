@@ -12,6 +12,7 @@ import {
   AreaSelectorPropsDto,
   AreaSelectorResultDto,
 } from "@luohc92/vue3-area-selector";
+import "@luohc92/vue3-area-selector/dist/style.css";
 const areaSelectProps = ref<AreaSelectorPropsDto>({
   disabled: ["1301", "1302"],
 });

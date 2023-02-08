@@ -30,6 +30,7 @@ import {
   AreaSelectorPropsDto,
   AreaSelectorResultDto,
 } from "@luohc92/vue3-area-selector";
+import "@luohc92/vue3-area-selector/dist/style.css";
 const areaSelectProps = ref<AreaSelectorPropsDto>({
   level: 1,
   showAllLevels: true,
