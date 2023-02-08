@@ -130,3 +130,16 @@ const close = (data: AreaSelectorResultDto) => {
 | Name                    | Description                                   |
 | -------------- |------------------------------------------------- | 
 | — | HTML element that triggers area selector 触发地址选择器显示的 HTML 元素 | 
+
+## css var 
+```
+  --area-selector-panel-bg: #fff;
+  --area-selector-border-color: #dcdfe6;
+  --area-selector-disable-bg: #f5f7fa;
+  --area-selector-placeholder-color: #a8abb2;
+  --area-selector-active-color: #409eff;
+  --area-selector-text-color: #606266;
+  --area-selector-list-item-hover-color: #f5f5f5;
+  --area-selector-list-item-disabled-color: #aaaaaa;
+  --area-selector-clearable-color: #aaaaaa;
+```
